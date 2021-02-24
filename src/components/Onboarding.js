@@ -1,72 +1,66 @@
 import React, { Component } from "react";
-import Register from "./Register";
-import Login from "./Login";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import {
   View,
   Text,
   StatusBar,
   StyleSheet,
   Dimensions,
-  Button,
+  TouchableOpacity,
   Image,
 } from "react-native";
 import Swiper from "react-native-swiper";
 
 const { width, height } = Dimensions.get("window");
 
-const Stack = createStackNavigator();
-
-export default class Onboarding extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <StatusBar hidden={true} />
-        <Swiper autoplay={false} showsButtons={true}>
-          <View style={{ flex: 1 }}>
-            <Image
-              style={styles.image}
-              source={require("../assets/images/img-1.jpg")}
-            />
-          </View>
-          <View style={{ flex: 1 }}>
-            <Image
-              style={styles.image}
-              source={require("../assets/images/img-2.jpg")}
-            />
-          </View>
-          <View style={{ flex: 1 }}>
-            <Image
-              style={styles.image}
-              source={require("../assets/images/img-3.jpg")}
-            />
-          </View>
-        </Swiper>
-        <View style={styles.textContainer}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Meu painel</Text>
-          </View>
-          <View style={styles.subTItleContainer}>
-            <Text style={styles.subtitle}>Acesse, ou se inscreva.</Text>
-          </View>
+export default function Board({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <StatusBar hidden={true} />
+      <Swiper autoplay={true}>
+        <View style={{ flex: 1 }}>
+          <Image
+            style={styles.image}
+            source={require("../assets/images/img-1.jpg")}
+          />
         </View>
-        <View style={styles.buttonContainer}>
-          <View style={styles.signupContainer}>
-            <Text style={styles.signup}>Registrar-se</Text>
-          </View>
-          <View style={styles.loginContainer}>
-            <Text style={styles.login}>Login</Text>
-          </View>
+        <View style={{ flex: 1 }}>
+          <Image
+            style={styles.image}
+            source={require("../assets/images/img-2.jpg")}
+          />
+        </View>
+        <View style={{ flex: 1 }}>
+          <Image
+            style={styles.image}
+            source={require("../assets/images/img-3.jpg")}
+          />
+        </View>
+      </Swiper>
+      <View style={styles.textContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Meu painel</Text>
+        </View>
+        <View style={styles.subTItleContainer}>
+          <Text style={styles.subtitle}>Acesse, ou se inscreva.</Text>
         </View>
       </View>
-    );
-  }
+      <View style={styles.buttonContainer}>
+        <View style={styles.signupContainer}>
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+            <Text style={styles.signup}>Registrar-se</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.loginContainer}>
+          <TouchableOpacity
+            title="Login"
+            onPress={() => navigation.navigate("Login")}
+          >
+            <Text style={styles.login}>Login</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -154,5 +148,6 @@ const styles = StyleSheet.create({
   login: {
     fontWeight: "bold",
     color: "#3b55e6",
+    backgroundColor: "transparent",
   },
 });
